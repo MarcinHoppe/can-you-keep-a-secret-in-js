@@ -12,7 +12,9 @@ function seal({ encryptionKey, signingKey }, userData) {
 
 function unseal({ encryptionKey, signingKey }, secretToken) {
   const [iv, ciphertext, signature] = deserialize(secretToken);
-  signVerify(signingKey, iv, ciphertext, signature);
+  if (!signVerify(signingKey, iv, ciphertext, signature)) {
+    throw new Error('Invalid signature');
+  }
   return decrypt(encryptionKey, iv, ciphertext);
 }
 
@@ -67,7 +69,7 @@ function serialize(iv, ciphertext, signature) {
 function deserialize(secretToken) {
   const ciphertextLen = secretToken.length - 48;
   return [
-    secretToken.subarray(0, 16),
+    secretToken.subarray(0,16),
     secretToken.subarray(16, 16 + ciphertextLen),
     secretToken.subarray(16 + ciphertextLen)
   ]
