@@ -1,4 +1,3 @@
-const assert = require('assert');
 const crypto = require('crypto');
 
 // ----------------- HIGH LEVEL FLOW -----------------
@@ -83,8 +82,7 @@ const secret = 'Hello from JS Poland!';
 const secretToken = seal(keys, secret);
 const recoveredSecret = unseal(keys, secretToken);
 
-assert.deepStrictEqual(
-  recoveredSecret,
-  secret,
+console.assert(
+  secret === recoveredSecret,
   'Original secret and recovered secret must be the same.'
 );
