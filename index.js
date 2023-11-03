@@ -23,7 +23,7 @@ function generateKeys() {
   return {
     encryptionKey: crypto.generateKeySync('aes', { length: 128 }),
     signingKey: crypto.generateKeySync('hmac', { length: 128 })
-  }
+  };
 }
 
 function generateIv() {
@@ -71,7 +71,7 @@ function deserialize(secretToken) {
     secretToken.subarray(0,16),
     secretToken.subarray(16, 16 + ciphertextLen),
     secretToken.subarray(16 + ciphertextLen)
-  ]
+  ];
 }
 
 // ----------------- USAGE -----------------
