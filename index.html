@@ -15,7 +15,7 @@
       if (!await signVerify(signingKey, iv, ciphertext, signature)) {
         throw new Error('Invalid signature');
       }
-      return decrypt(encryptionKey, iv, ciphertext);
+      return await decrypt(encryptionKey, iv, ciphertext);
     }
 
     // ----------------- PRIMITIVES -----------------
